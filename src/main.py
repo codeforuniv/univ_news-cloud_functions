@@ -13,6 +13,9 @@ def crawl(_event, _context):
     write_university(instances)
     data = sum_data(instances)
     write_news(instances, data)
+    
+    covid19_newsids = judge_covid19(instances)
+    write_covid19(covid19_newsids)
     return
 
 def fetch_funcnames():
@@ -95,3 +98,40 @@ def write_news(instances, data):
                 'timestamp': firestore.SERVER_TIMESTAMP
             })
             print(collection_name,d)
+
+
+def judge_covid19(instances):
+	'''
+	universityコレクションにあるnewsidから、covid19コレクションに追加するidを判別
+	'''
+	db = firestore.Client()
+	covid19_collection = db.collection('covid-19')
+	covid19_docs = covid19_collection.stream()
+	covid19_newsids_old = [doc.to_dict()['newsId'] for doc in covid19_docs]
+	covid19_words = ['コロナ','ウイルス','感染','covid','Covid','COVID']
+	covid19_newsids_new = []
+
+	for univ in instances:
+		collection_name = univ.collection_name
+		university_collection = db.collection('university').document(collection_name).collection('news')
+		docs = university_collection.stream()
+		for doc in docs:
+			doc_dict = doc.to_dict()
+			if any([word in doc_dict['title'] for word in covid19_words]) and not doc.id in covid19_newsids_old:
+				covid19_newsids_new.append(doc.id)
+	print(covid19_newsids_new)
+	return covid19_newsids_new
+
+
+def write_covid19(covid19_newsids_new):
+	'''
+	取得したidを、covid19コレクションに追加
+	'''
+	db = firestore.Client()
+	collection = db.collection('covid-19')
+	for newsid in covid19_newsids_new:
+		docs = collection.document()
+		docs.set({
+            'newsId': newsid,
+            'timestamp': firestore.SERVER_TIMESTAMP
+        })
