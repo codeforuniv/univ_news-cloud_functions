@@ -1,0 +1,6 @@
+# Function dependencies, for example:
+# package>=version
+bs4
+html5lib
+pandas==1.0.0
+google-cloud-firestore==1.2.0
