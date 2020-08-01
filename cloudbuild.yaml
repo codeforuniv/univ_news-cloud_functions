@@ -4,7 +4,7 @@ steps:
       [
         "functions",
         "deploy",
-        "function-",
+        "function-crawl",
         "--source=./src",
         "--trigger-topic=univNews_topic",
         "--runtime",
