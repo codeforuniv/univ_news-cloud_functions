@@ -1,3 +1,16 @@
 steps:
-    - name: 'gcr.io/cloud-builders/gcloud'
-        args: ['functions','deploy','function-crawl','--source=./src','--trigger-topic=univNews_topic','--runtime','python37','--entry-point','crawl','--region','asia-northeast1']
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "functions",
+        "deploy",
+        "function-",
+        "--source=./src",
+        "--trigger-topic=univNews_topic",
+        "--runtime",
+        "python37",
+        "--entry-point",
+        "crawl",
+        "--region",
+        "asia-northeast1",
+      ]
