@@ -2,7 +2,7 @@ import os, glob
 import pandas as pd
 import json
 import inspect
-# from google.cloud import firestore
+from google.cloud import firestore
 from datetime import datetime, date, timedelta
 
 # collection_nameとscraping.pyの関数名が一致している必要がある
