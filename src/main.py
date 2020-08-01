@@ -9,6 +9,7 @@ from university import *
 
 def crawl(_event, _context):
     names = [os.path.split(os.path.splitext(file)[0])[1] for file in glob.glob(os.path.join(os.path.dirname(__file__)+'/university/','[a-zA-Z0-9]*.py'))]
+    names.remove('AkitaInternational') # 国際教養大がバグが起きているのでいったん除外
     instances = [eval(name + '.' + name + '()') for name in names]
     write_university(instances)
     data = sum_data(instances)
