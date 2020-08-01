@@ -15,7 +15,7 @@ class AkitaInternational:
         
         c_list = soup.find_all('div',class_="topic_item")
         title_list = [i.find('h5').get_text(strip=True)  for i in c_list]
-        img_list = [i.find('img')['src']  for i in c_list]
+        img_list = [i.find('img')['src'] if 'img' in i else "https://web.aiu.ac.jp/wp/wp-content/themes/aiu/images/common/logo01.svg" for i in c_list]
         date_list = [i.find('span', class_='date').get_text(strip=True)  for i in c_list]
         url_list = [i.find('a')['href'] for i in c_list]
         df = pd.DataFrame([title_list,img_list,date_list,url_list],index=['name','img','date','url']).T
