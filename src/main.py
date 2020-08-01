@@ -1,7 +1,5 @@
 import os, glob
 import pandas as pd
-import json
-import inspect
 from google.cloud import firestore
 from datetime import datetime, date, timedelta
 
@@ -20,16 +18,9 @@ def crawl(_event, _context):
     write_covid19(covid19_newsids)
     return
 
-def fetch_funcnames():
-    '''
-    scraping.py内の関数名を取得する
-    '''
-    return [x[0] for x in inspect.getmembers(University(),inspect.ismethod)]
-
-
 def sum_data(instances):
     '''
-    University().dfから指定の日付のニュースのみを抽出する
+    instance.dfから指定の日付のニュースのみを抽出する
     '''
     newsdate = pd.Timestamp(date.today() - timedelta(hours=12))
     db = firestore.Client()
