@@ -1,15 +1,17 @@
+import os, glob
 import pandas as pd
 import json
 import inspect
-from google.cloud import firestore
+# from google.cloud import firestore
 from datetime import datetime, date, timedelta
 
 # collection_nameとscraping.pyの関数名が一致している必要がある
-from scraping import University
+from university import *
 
 
 def crawl(_event, _context):
-    instances = [eval('University().' + func_name + '()') for func_name in fetch_funcnames()]
+    names = [os.path.split(os.path.splitext(file)[0])[1] for file in glob.glob(os.path.join(os.path.dirname(__file__)+'/university/','[a-zA-Z0-9]*.py'))]
+    instances = [eval(name + '.' + name + '()') for name in names]
     write_university(instances)
     data = sum_data(instances)
     write_news(instances, data)
