@@ -24,23 +24,23 @@ class University:
         self.df = df
         return self
 
-    def akita_international(self):
-        self.collection_name = sys._getframe().f_code.co_name
-        self.name = '国際教養大学'
-        self.url = 'https://web.aiu.ac.jp/aiutopics/'
-        res = requests.get(self.url)
-        soup = BeautifulSoup(res.content, 'html.parser')
+    # def akita_international(self):
+    #     self.collection_name = sys._getframe().f_code.co_name
+    #     self.name = '国際教養大学'
+    #     self.url = 'https://web.aiu.ac.jp/aiutopics/'
+    #     res = requests.get(self.url)
+    #     soup = BeautifulSoup(res.content, 'html.parser')
         
-        c_list = soup.find_all('div',class_="topic_item")
-        title_list = [i.find('h5').get_text(strip=True)  for i in c_list]
-        img_list = [i.find('img')['src']  for i in c_list]
-        date_list = [i.find('span', class_='date').get_text(strip=True)  for i in c_list]
-        url_list = [i.find('a')['href'] for i in c_list]
-        df = pd.DataFrame([title_list,img_list,date_list,url_list],index=['name','img','date','url']).T
-        df['college'] = self.name
-        df.date = pd.to_datetime(df.date)
-        self.df = df
-        return self
+    #     c_list = soup.find_all('div',class_="topic_item")
+    #     title_list = [i.find('h5').get_text(strip=True)  for i in c_list]
+    #     img_list = [i.find('img')['src']  for i in c_list]
+    #     date_list = [i.find('span', class_='date').get_text(strip=True)  for i in c_list]
+    #     url_list = [i.find('a')['href'] for i in c_list]
+    #     df = pd.DataFrame([title_list,img_list,date_list,url_list],index=['name','img','date','url']).T
+    #     df['college'] = self.name
+    #     df.date = pd.to_datetime(df.date)
+    #     self.df = df
+    #     return self
 
     def icu(self):
         self.collection_name = sys._getframe().f_code.co_name
