@@ -13,7 +13,7 @@ class Nagoya:
         res = requests.get(self.url)
         soup = BeautifulSoup(res.content, 'html.parser')
         
-        c_list = soup.find_all('div',class_="post clearfix")
+        c_list = sum([soup.find_all('dd',class_='bg clearfix')[i].find_all('div',class_='info-box clearfix') for i in [3,4]],[])
         title_list = [i.find('a').get_text(strip=True) for i in c_list]
         img_list = [i.select('img')[0]['src'] if len(i.select('img'))>0 else 'http://www.nagoya-u.ac.jp/common/img/logo.gif' for i in c_list]
         date_list = [i.find('p',class_='day').get_text(strip=True) for i in c_list]
