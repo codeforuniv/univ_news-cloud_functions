@@ -1,3 +1,14 @@
+## 主タスク
+<スプレッドシート>
+- https://docs.google.com/spreadsheets/d/1yra4f5-MeGzrRkp8QNdxsAQVxvqpcBQw0gi32g8ow-0/edit?usp=sharing
+- 大学候補と完了リストを更新していく
+- 目標は100大学
+
+<ページ>
+- [x] トップページ
+- [x] コロナ関連ページ
+- [ ] 研究ページ
+
 ## 参考資料
 
 - https://cloud.google.com/source-repositories/docs/integrating-with-cloud-build?hl=ja
