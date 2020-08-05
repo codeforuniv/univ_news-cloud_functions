@@ -20,7 +20,7 @@ class Kyusyu:
         url_list = ['https://www.kyushu-u.ac.jp'+i.find('dd').find('a')['href'] for i in c_list]
         df = pd.DataFrame([title_list,img_list,date_list,url_list],index=['name','img','date','url']).T
         df['college'] = self.name
-        #df.date = pd.to_datetime(df.date.map(lambda x:re.sub('[年月]','/',x.replace('日',''))))
+        df.date = pd.to_datetime(df.date)
         self.df = df
 
 #テスト用
