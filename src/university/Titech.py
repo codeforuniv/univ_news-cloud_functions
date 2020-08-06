@@ -15,7 +15,10 @@ class Titech:
         
         c_list = soup.find_all('div',class_="boxNews01")
         title_list = [i.find('p',class_="title").get_text(strip=True)  for i in c_list]
-        img_list = ['https://www.titech.ac.jp' + i.find('img')['data-src'] for i in c_list]
+        img_list = [
+            'https://www.titech.ac.jp' + i.find('img')['data-src'] if i.find('img').has_attr('data-src')
+            else 'https://www.titech.ac.jp' + i.find('img')['src']
+            for i in c_list]
         date_list = [i.find('p',class_="date").get_text(strip=True) for i in c_list]
         url_list = ['https://www.titech.ac.jp' + i.find('p',class_="title").find('a')['href'] for i in c_list]
         df = pd.DataFrame([title_list,img_list,date_list,url_list],index=['name','img','date','url']).T
