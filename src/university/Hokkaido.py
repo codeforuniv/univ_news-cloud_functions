@@ -16,7 +16,7 @@ class Hokkaido:
         c_list = soup.find('div',id="infoList",class_="topicsWrap01 active").find_all('li')
         title_list = [i.find('a').get_text(strip=True)  for i in c_list]
         img_list = ['https://www.hokudai.ac.jp'+i.find('img')['src']  for i in c_list]
-        date_list = [i.find('time').get_text(strip=True)  for i in c_list]
+        date_list = [i.find('time').get_text(strip=True).replace(' ','')  for i in c_list]
         url_list = ['https://www.hokudai.ac.jp'+i.find('a')['href'] for i in c_list]
         df = pd.DataFrame([title_list,img_list,date_list,url_list],index=['name','img','date','url']).T
         df['college'] = self.name

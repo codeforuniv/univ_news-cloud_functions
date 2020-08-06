@@ -7,4 +7,4 @@ __all__ = [
 ]
 
 # 国際教養大がバグが起きているのでいったん除外
-__all__.remove('AkitaInternational')
+# __all__.remove('AkitaInternational')
